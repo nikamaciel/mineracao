@@ -1,8 +1,8 @@
 import requests
 
 # 🔗 Dados da Loja Shopify
-SHOPIFY_API_URL = "https://enigmafemme.com/admin/api/2023-10/products.json"
-SHOPIFY_ACCESS_TOKEN = "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"
+SHOPIFY_API_URL = "https://enigmafemme.myshopify.com/admin/api/2023-10/products.json"  # URL correta da API
+SHOPIFY_ACCESS_TOKEN = "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"  # Seu token de acesso
 
 # 🔍 Simulando a extração de produtos do site Kaisan
 produtos_extraidos = [
@@ -20,8 +20,16 @@ for produto in produtos_extraidos:
     payload = {
         "product": {
             "title": produto["title"],
+            "body_html": f"<strong>{produto['title']}</strong>",  # Descrição do produto
+            "vendor": "Kaisan",
+            "product_type": "Fitness",
             "variants": [
-                {"price": produto["price"], "sku": produto["sku"]}
+                {
+                    "price": produto["price"], 
+                    "sku": produto["sku"],
+                    "inventory_management": "shopify",
+                    "inventory_quantity": 100  # A quantidade inicial em estoque
+                }
             ]
         }
     }
