@@ -1,31 +1,11 @@
-import requests
+from dotenv import load_dotenv
+import os
 
-# Token de Acesso da API Admin
-SHOPIFY_ACCESS_TOKEN = "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"
-SHOPIFY_STORE_URL = "https://enigmafemme.com"  # URL da sua loja
-SHOPIFY_API_VERSION = "2023-01"
+# Carregar as variáveis do ambiente
+load_dotenv()
 
-# URL da API para criar produtos
-url = f"{SHOPIFY_STORE_URL}/admin/api/{SHOPIFY_API_VERSION}/products.json"
+SHOPIFY_ACCESS_TOKEN = os.getenv("SHOPIFY_ACCESS_TOKEN")
+SHOPIFY_STORE_URL = os.getenv("SHOPIFY_STORE_URL")
 
-# Cabeçalhos com autenticação correta
-headers = {
-    "Content-Type": "application/json",
-    "X-Shopify-Access-Token": SHOPIFY_ACCESS_TOKEN  # Usando o Token de Acesso da API Admin
-}
+print(f"Conectando à loja: {SHOPIFY_STORE_URL}")
 
-# Dados de um produto de teste
-data = {
-    "product": {
-        "title": "Legging Teste",
-        "vendor": "Kaisan",
-        "product_type": "Fitness",
-        "variants": [{"price": "99.90"}]
-    }
-}
-
-# Fazendo a requisição
-response = requests.post(url, json=data, headers=headers)
-
-# Verificando se funcionou
-print(response.status_code, response.json())
