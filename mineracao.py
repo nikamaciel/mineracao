@@ -2,7 +2,8 @@ import requests
 
 # 🔗 Dados da Loja Shopify
 SHOPIFY_API_URL = "https://enigmafemme.myshopify.com/admin/api/2023-10/products.json"  # URL correta da API
-SHOPIFY_ACCESS_TOKEN = "617d6bfbf8622c9c731a8e6f7177724d"  # Seu token de acesso
+SHOPIFY_API_KEY = "1be2adc3e9404ec827aea369428189bd"  # Chave de API
+SHOPIFY_API_PASSWORD = "8bfdc1a58652f167b9341cddfadffaef"  # Chave Secreta da API (Senha de API)
 
 # 🔍 Simulando a extração de produtos do site Kaisan
 produtos_extraidos = [
@@ -36,15 +37,14 @@ for produto in produtos_extraidos:
     
     headers = {
         "Content-Type": "application/json",
-        "X-Shopify-Access-Token": SHOPIFY_ACCESS_TOKEN
     }
-    
-    print(f"📤 Enviando produto '{produto['title']}' para o Shopify...")
 
-    # Corrigindo a linha da requisição
-    response = requests.post(SHOPIFY_API_URL, headers=headers, json=payload)
+    # Autenticando com Chave de API e Senha da API
+    response = requests.post(SHOPIFY_API_URL, json=payload, auth=(SHOPIFY_API_KEY, SHOPIFY_API_PASSWORD))
 
     # 📝 Verificando a resposta do Shopify
+    print(f"📤 Enviando produto '{produto['title']}' para o Shopify...")
     print("📝 Resposta do Shopify:", response.status_code, response.text)
 
 print("✅ Processo finalizado!")
+
