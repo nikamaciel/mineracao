@@ -37,13 +37,12 @@ for produto in produtos_extraidos:
     headers = {
         "Content-Type": "application/json",
         "X-Shopify-Access-Token": SHOPIFY_ACCESS_TOKEN
-        
     }
     
     print(f"📤 Enviando produto '{produto['title']}' para o Shopify...")
 
-    response = requests.post(url, auth=(“fe651dbae88b7513021c8461fabff8c4Y”, “617d6bfbf8622c9c731a8e6f7177724d”), json=data)
-
+    # Corrigindo a linha da requisição
+    response = requests.post(SHOPIFY_API_URL, headers=headers, json=payload)
 
     # 📝 Verificando a resposta do Shopify
     print("📝 Resposta do Shopify:", response.status_code, response.text)
