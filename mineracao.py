@@ -2,7 +2,7 @@ import requests
 
 # 🔗 Dados da Loja Shopify
 SHOPIFY_API_URL = "https://enigmafemme.myshopify.com/admin/api/2023-10/products.json"  # URL correta da API
-SHOPIFY_ACCESS_TOKEN = "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"  # Seu token de acesso
+SHOPIFY_ACCESS_TOKEN = "617d6bfbf8622c9c731a8e6f7177724d"  # Seu token de acesso
 
 # 🔍 Simulando a extração de produtos do site Kaisan
 produtos_extraidos = [
@@ -42,7 +42,7 @@ for produto in produtos_extraidos:
     
     print(f"📤 Enviando produto '{produto['title']}' para o Shopify...")
 
-    response = requests.post("https://www.kaisan.com.br/produtos", auth=("fe651dbae88b7513021c8461fabff8c4Y", "617d6bfbf8622c9c731a8e6f7177724d"), json=data)
+    response = requests.post(url, auth=(“fe651dbae88b7513021c8461fabff8c4Y”, “617d6bfbf8622c9c731a8e6f7177724d”), json=data)
 
 
     # 📝 Verificando a resposta do Shopify
